@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as GestesRouteImport } from './routes/gestes'
 import { Route as AcademieIndexRouteImport } from './routes/academie/index'
 import { Route as AcademieSportRouteImport } from './routes/academie/$sport'
 import { Route as LeconLessonIdRouteImport } from './routes/lecon.$lessonId'
@@ -23,6 +24,11 @@ const IndexRoute = IndexRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GestesRoute = GestesRouteImport.update({
+  id: '/gestes',
+  path: '/gestes',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AcademieIndexRoute = AcademieIndexRouteImport.update({
@@ -44,6 +50,7 @@ const LeconLessonIdRoute = LeconLessonIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/gestes': typeof GestesRoute
   '/academie/$sport': typeof AcademieSportRoute
   '/lecon/$lessonId': typeof LeconLessonIdRoute
   '/academie/': typeof AcademieIndexRoute
@@ -51,6 +58,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/gestes': typeof GestesRoute
   '/academie/$sport': typeof AcademieSportRoute
   '/lecon/$lessonId': typeof LeconLessonIdRoute
   '/academie': typeof AcademieIndexRoute
@@ -59,6 +67,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/gestes': typeof GestesRoute
   '/academie/$sport': typeof AcademieSportRoute
   '/lecon/$lessonId': typeof LeconLessonIdRoute
   '/academie/': typeof AcademieIndexRoute
@@ -66,13 +75,25 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/auth' | '/academie/$sport' | '/lecon/$lessonId' | '/academie/'
+    | '/'
+    | '/auth'
+    | '/gestes'
+    | '/academie/$sport'
+    | '/lecon/$lessonId'
+    | '/academie/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/academie/$sport' | '/lecon/$lessonId' | '/academie'
+  to:
+    | '/'
+    | '/auth'
+    | '/gestes'
+    | '/academie/$sport'
+    | '/lecon/$lessonId'
+    | '/academie'
   id:
     | '__root__'
     | '/'
     | '/auth'
+    | '/gestes'
     | '/academie/$sport'
     | '/lecon/$lessonId'
     | '/academie/'
@@ -81,6 +102,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
+  GestesRoute: typeof GestesRoute
   AcademieSportRoute: typeof AcademieSportRoute
   LeconLessonIdRoute: typeof LeconLessonIdRoute
   AcademieIndexRoute: typeof AcademieIndexRoute
@@ -100,6 +122,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gestes': {
+      id: '/gestes'
+      path: '/gestes'
+      fullPath: '/gestes'
+      preLoaderRoute: typeof GestesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/academie/': {
@@ -129,6 +158,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
+  GestesRoute: GestesRoute,
   AcademieSportRoute: AcademieSportRoute,
   LeconLessonIdRoute: LeconLessonIdRoute,
   AcademieIndexRoute: AcademieIndexRoute,
