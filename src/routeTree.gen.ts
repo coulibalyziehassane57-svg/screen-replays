@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AcademieIndexRouteImport } from './routes/academie/index'
+import { Route as AcademieSportRouteImport } from './routes/academie/$sport'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,34 +29,43 @@ const AcademieIndexRoute = AcademieIndexRouteImport.update({
   path: '/academie/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AcademieSportRoute = AcademieSportRouteImport.update({
+  id: '/academie/$sport',
+  path: '/academie/$sport',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/academie/$sport': typeof AcademieSportRoute
   '/academie/': typeof AcademieIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/academie/$sport': typeof AcademieSportRoute
   '/academie': typeof AcademieIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/academie/$sport': typeof AcademieSportRoute
   '/academie/': typeof AcademieIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/academie/'
+  fullPaths: '/' | '/auth' | '/academie/$sport' | '/academie/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/academie'
-  id: '__root__' | '/' | '/auth' | '/academie/'
+  to: '/' | '/auth' | '/academie/$sport' | '/academie'
+  id: '__root__' | '/' | '/auth' | '/academie/$sport' | '/academie/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
+  AcademieSportRoute: typeof AcademieSportRoute
   AcademieIndexRoute: typeof AcademieIndexRoute
 }
 
@@ -82,12 +92,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AcademieIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/academie/$sport': {
+      id: '/academie/$sport'
+      path: '/academie/$sport'
+      fullPath: '/academie/$sport'
+      preLoaderRoute: typeof AcademieSportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
+  AcademieSportRoute: AcademieSportRoute,
   AcademieIndexRoute: AcademieIndexRoute,
 }
 export const routeTree = rootRouteImport
