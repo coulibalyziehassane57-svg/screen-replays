@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as GestesRouteImport } from './routes/gestes'
+import { Route as SimulateurRouteImport } from './routes/simulateur'
+import { Route as AcademieIndexRouteImport } from './routes/academie/index'
+import { Route as AcademieSportRouteImport } from './routes/academie/$sport'
+import { Route as LeconLessonIdRouteImport } from './routes/lecon.$lessonId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GestesRoute = GestesRouteImport.update({
+  id: '/gestes',
+  path: '/gestes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SimulateurRoute = SimulateurRouteImport.update({
+  id: '/simulateur',
+  path: '/simulateur',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademieIndexRoute = AcademieIndexRouteImport.update({
+  id: '/academie/',
+  path: '/academie/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademieSportRoute = AcademieSportRouteImport.update({
+  id: '/academie/$sport',
+  path: '/academie/$sport',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeconLessonIdRoute = LeconLessonIdRouteImport.update({
+  id: '/lecon/$lessonId',
+  path: '/lecon/$lessonId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/gestes': typeof GestesRoute
+  '/simulateur': typeof SimulateurRoute
+  '/academie/$sport': typeof AcademieSportRoute
+  '/lecon/$lessonId': typeof LeconLessonIdRoute
+  '/academie/': typeof AcademieIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/gestes': typeof GestesRoute
+  '/simulateur': typeof SimulateurRoute
+  '/academie/$sport': typeof AcademieSportRoute
+  '/lecon/$lessonId': typeof LeconLessonIdRoute
+  '/academie': typeof AcademieIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/gestes': typeof GestesRoute
+  '/simulateur': typeof SimulateurRoute
+  '/academie/$sport': typeof AcademieSportRoute
+  '/lecon/$lessonId': typeof LeconLessonIdRoute
+  '/academie/': typeof AcademieIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/gestes'
+    | '/simulateur'
+    | '/academie/$sport'
+    | '/lecon/$lessonId'
+    | '/academie/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/gestes'
+    | '/simulateur'
+    | '/academie/$sport'
+    | '/lecon/$lessonId'
+    | '/academie'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/gestes'
+    | '/simulateur'
+    | '/academie/$sport'
+    | '/lecon/$lessonId'
+    | '/academie/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRoute
+  GestesRoute: typeof GestesRoute
+  SimulateurRoute: typeof SimulateurRoute
+  AcademieSportRoute: typeof AcademieSportRoute
+  LeconLessonIdRoute: typeof LeconLessonIdRoute
+  AcademieIndexRoute: typeof AcademieIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gestes': {
+      id: '/gestes'
+      path: '/gestes'
+      fullPath: '/gestes'
+      preLoaderRoute: typeof GestesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/simulateur': {
+      id: '/simulateur'
+      path: '/simulateur'
+      fullPath: '/simulateur'
+      preLoaderRoute: typeof SimulateurRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academie/': {
+      id: '/academie/'
+      path: '/academie'
+      fullPath: '/academie/'
+      preLoaderRoute: typeof AcademieIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academie/$sport': {
+      id: '/academie/$sport'
+      path: '/academie/$sport'
+      fullPath: '/academie/$sport'
+      preLoaderRoute: typeof AcademieSportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lecon/$lessonId': {
+      id: '/lecon/$lessonId'
+      path: '/lecon/$lessonId'
+      fullPath: '/lecon/$lessonId'
+      preLoaderRoute: typeof LeconLessonIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRoute,
+  GestesRoute: GestesRoute,
+  SimulateurRoute: SimulateurRoute,
+  AcademieSportRoute: AcademieSportRoute,
+  LeconLessonIdRoute: LeconLessonIdRoute,
+  AcademieIndexRoute: AcademieIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
