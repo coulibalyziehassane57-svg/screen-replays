@@ -104,7 +104,7 @@ function AdminPage() {
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2">
               <Label>Sport</Label>
-              <Select value={sportId} onValueChange={setSportId}>
+              <Select value={sportId ?? ""} onValueChange={setSportId}>
                 <SelectTrigger>
                   <SelectValue placeholder="Choisir" />
                 </SelectTrigger>

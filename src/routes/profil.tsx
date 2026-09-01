@@ -228,8 +228,8 @@ function ProfilePage() {
         <CardContent className="p-5">
           <h2 className="font-display text-lg font-bold">Compétences</h2>
           <div className="mt-3 space-y-3">
-            <SkillBar label={SKILLS.regles} value={skills.data?.regles ?? 0} />
-            <SkillBar label={SKILLS.decision} value={skills.data?.decision ?? 0} />
+            <SkillBar label={SKILLS["regles"] ?? "Règles"} value={skills.data?.regles ?? 0} />
+            <SkillBar label={SKILLS["decision"] ?? "Décision"} value={skills.data?.decision ?? 0} />
           </div>
         </CardContent>
       </Card>

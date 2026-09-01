@@ -44,7 +44,7 @@ function GesturesPage() {
       </p>
 
       <div className="mt-4 max-w-xs">
-        <Select value={activeSport} onValueChange={setSportId}>
+        <Select value={activeSport ?? ""} onValueChange={setSportId}>
           <SelectTrigger>
             <SelectValue placeholder="Choisir un sport" />
           </SelectTrigger>
