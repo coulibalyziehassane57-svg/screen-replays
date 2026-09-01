@@ -9,7 +9,6 @@ import { supabase } from "@/integrations/supabase/client";
 import {
   addXp,
   fetchLesson,
-  fetchLessons,
   fetchQuestions,
   fetchSetting,
   grantBadge,
