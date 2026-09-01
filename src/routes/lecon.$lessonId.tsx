@@ -257,11 +257,11 @@ function LessonPage() {
 
           <Card>
             <CardContent className="p-5">
-              <p className="font-display text-xl font-bold">{quiz[index].prompt}</p>
+              <p className="font-display text-xl font-bold">{quiz[index]!.prompt}</p>
               <div className="mt-4 space-y-2">
-                {quiz[index].choices.map((choice, i) => {
+                {quiz[index]!.choices.map((choice, i) => {
                   const revealed = selected !== null;
-                  const correct = i === quiz[index].correct_index;
+                  const correct = i === quiz[index]!.correct_index;
                   return (
                     <button
                       key={i}
@@ -286,7 +286,7 @@ function LessonPage() {
               {selected !== null && (
                 <div className="mt-4 rounded-xl border border-border bg-secondary/50 p-4 text-sm">
                   <p className="flex items-center gap-2 font-semibold">
-                    {selected === quiz[index].correct_index ? (
+                    {selected === quiz[index]!.correct_index ? (
                       <>
                         <CheckCircle2 className="h-4 w-4 text-success" /> Bonne réponse
                       </>
@@ -296,7 +296,7 @@ function LessonPage() {
                       </>
                     )}
                   </p>
-                  <p className="mt-1 text-muted-foreground">{quiz[index].explanation}</p>
+                  <p className="mt-1 text-muted-foreground">{quiz[index]!.explanation}</p>
                 </div>
               )}
 
@@ -304,7 +304,7 @@ function LessonPage() {
                 className="mt-4 w-full"
                 disabled={selected === null}
                 onClick={() => {
-                  const updated = [...answers, { question: quiz[index], picked: selected! }];
+                  const updated = [...answers, { question: quiz[index]!, picked: selected! }];
                   setAnswers(updated);
                   setSelected(null);
                   if (index + 1 >= quiz.length) {
