@@ -103,7 +103,7 @@ function SimulatorPage() {
 
       <div className="mt-4 flex flex-wrap gap-3">
         <div className="w-48">
-          <Select value={activeSport} onValueChange={setSportId}>
+          <Select value={activeSport ?? ""} onValueChange={setSportId}>
             <SelectTrigger>
               <SelectValue placeholder="Sport" />
             </SelectTrigger>
