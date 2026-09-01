@@ -130,9 +130,10 @@ function GestureTraining({ gestures }: { gestures: Gesture[] }) {
   const [picked, setPicked] = useState<string | null>(null);
 
   const deck = useMemo(() => shuffle(gestures).slice(0, 4), [gestures, round]);
+  const options = useMemo(() => shuffle(deck), [deck]);
   const target = deck[0];
 
-  if (gestures.length < 3) {
+  if (gestures.length < 3 || !target) {
     return (
       <Card>
         <CardContent className="p-6 text-sm text-muted-foreground">
@@ -142,7 +143,6 @@ function GestureTraining({ gestures }: { gestures: Gesture[] }) {
     );
   }
 
-  const options = useMemo(() => shuffle(deck), [deck]);
 
   return (
     <Card>
